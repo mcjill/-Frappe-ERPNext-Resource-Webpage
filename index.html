@@ -165,67 +165,160 @@
             background-color: var(--button-hover-bg-color, #e0e0e0);
         }
 
-        @media screen and (max-width: 768px) {
-            .navbar {
-                width: 100%;
-                border-radius: 0;
-                padding: 0.5rem 0;
-            }
-
-            .main-area {
-                margin-left: 0;
-                margin-top: 4rem;
-            }
-        }
-        #buy-me-coffee {
-    position: fixed;
-    top: 4rem; /* Adjusted */
-    right: 0;
-    padding: 0.5rem;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #ffffff;
-    border-radius: 0 0 10px 10px;
-    font-size: 14px;
-    z-index: 1;
+        .navbar__hamburger {
+    display: none;
     cursor: pointer;
+    padding: 0.5rem;
+    margin: 0.5rem;
+}
+
+.navbar__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-#buy-me-coffee:hover {
-    background-color: rgba(0, 0, 0, 0.9);
+.navbar__overlay.show {
+    opacity: 1;
+    visibility: visible;
 }
 
+@media screen and (max-width: 768px) {
+    .navbar {
+        position:fixed;
+        bottom: 900;
+        left: 0;
+        width: 100%;
+        height: auto;
+        border-radius: 0;
+        padding: 0;
+        z-index: 3;
+        background-color: var(--nav-bg-color, #ffffff);
+        display: none;
+        justify-content: center;
+    }
+
+    .navbar__hamburger {
+        display: none;
+    }
+
+    .navbar__menu {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        background-color: var(--nav-bg-color, #ffffff);
+    }
+
+    .navbar__item {
+        margin: 0;
+    }
+
+    .navbar__link {
+        justify-content: center;
+        padding: 0.5rem;
+        width: auto;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 0.8rem;
+    }
+
+    .navbar__link span {
+        margin: 0;
+        font-size: 0.6rem;
+    }
+
+    .main-area {
+        margin-top: 0;
+        max-width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .cards {
+        width: 90%;
+    }
+
+    .theme-switcher {
+        position: fixed;
+        bottom: 4rem;
+        right: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.5rem;
+    }
+
+    #buy-me-coffee {
+        top: auto;
+        bottom: 0.5rem;
+        right: 1rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: 5px;
+        font-size: 0.8rem;
+        opacity: 1;
+    }
+}
+
+.theme-button
+{
+  display: none;
+}
+
+body {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --nav-bg-color: #ffffff;
+    --nav-hover-color: #ffffff;
+    --nav-hover-bg-color: #406ff3;
+    --card-bg-color: #ffffff;
+    --button-bg-color: #f0f0f0;
+    --button-hover-bg-color: #e0e0e0;
+}
 </style>
 </head>
 
 <body class="site">
 <!-- Add the Buy Me a Coffee button with dynamic emojis -->
 
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <ul class="navbar__menu">
-            <li class="navbar__item">
-                <a href="#" class="navbar__link" data-filter="customers"><i class="fas fa-users"></i><span>Groups</span></a>
-            </li>
-            <li class="navbar__item">
-                <a href="#" class="navbar__link" data-filter="projects"><i class="fas fa-folder"></i><span>Repositories</span></a>
-            </li>
-            <li class="navbar__item">
-                <a href="#" class="navbar__link" data-filter="resources"><i class="fas fa-archive"></i><span>Resources</span></a>
-            </li>
-            <li class="navbar__item">
-                <a href="#" class="navbar__link" data-filter="settings"><i class="fas fa-cog"></i><span>Integrations</span></a>
-            </li>
-            <li class="navbar__item">
-                <a href="#" class="navbar__link" data-filter="reports"><i class="fas fa-file-alt"></i><span>Blogs</span></a>
-            </li>
-        </ul>
-    </nav>
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="navbar__hamburger">
+      <i class="fas fa-bars"></i>
+  </div>
+  <div class="navbar__overlay"></div>
+  <ul class="navbar__menu">
+      <li class="navbar__item">
+          <a href="#" class="navbar__link" data-filter="customers"><i class="fas fa-users"></i><span>Groups</span></a>
+      </li>
+      <li class="navbar__item">
+          <a href="#" class="navbar__link" data-filter="projects"><i class="fas fa-folder"></i><span>Repositories</span></a>
+      </li>
+      <li class="navbar__item">
+          <a href="#" class="navbar__link" data-filter="resources"><i class="fas fa-archive"></i><span>Resources</span></a>
+      </li>
+      <li class="navbar__item">
+          <a href="#" class="navbar__link" data-filter="settings"><i class="fas fa-cog"></i><span>Integrations</span></a>
+      </li>
+      <li class="navbar__item">
+          <a href="#" class="navbar__link" data-filter="reports"><i class="fas fa-file-alt"></i><span>Blogs</span></a>
+      </li>
+  </ul>
+</nav>
 
     <!-- Hero Section -->
     <header class="masthead">
-        <h1 class="site-title">Frappe-ERPNext Resource Webpage</h1>
+        <h1 class="site-title">Frappe-ERPNext Resource</h1>
     </header><!-- .masthead -->
 
     <main id="content" class="main-area">
@@ -507,6 +600,20 @@ function stickyBuyMeCoffee() {
         buyMeCoffeeButton.style.opacity = "0";
     }
 }
+
+const navbarHamburger = document.querySelector('.navbar__hamburger');
+const navbarMenu = document.querySelector('.navbar__menu');
+const navbarOverlay = document.querySelector('.navbar__overlay');
+
+navbarHamburger.addEventListener('click', () => {
+    navbarMenu.classList.toggle('show');
+    navbarOverlay.classList.toggle('show');
+});
+
+navbarOverlay.addEventListener('click', () => {
+    navbarMenu.classList.remove('show');
+    navbarOverlay.classList.remove('show');
+});
 
     </script>
     </body>
